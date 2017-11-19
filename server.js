@@ -12,7 +12,7 @@ const Models    = require('./models'); // Add the Models
 
 
 // Server Config
-server.connection(_.pick(Config, ['host', 'port', 'Routes']));
+server.connection(_.pick(Config, ['host', 'port', 'routes']));
 
 // Export the server to be required elsewhere.
 module.exports = server;
