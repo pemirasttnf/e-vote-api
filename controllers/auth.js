@@ -1,7 +1,6 @@
 'use strict';
 
 const Models = require('../models');
-const Uuidv1 = require('uuid/v1');
 const Bcrypt = require('bcrypt');
 const Boom = require('boom');
 const JwToken = require('../plugins/jwToken');
@@ -12,9 +11,6 @@ module.exports = {
     register: (request, reply) => {
 
         const attributes = request.payload;
-
-        // Create an uuid
-        attributes.userUuid = Uuidv1(); // ex ⇨ '985123a0-7e4f-11e7-9022-fb7190c856e4'
 
         Models.User.create(attributes).then((userCreated) => {
 
