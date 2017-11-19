@@ -17,7 +17,8 @@ module.exports = (sequelize, DataTypes) => {
         userUuid: {
             allowNull: true,
             type: DataTypes.UUID,
-            unique: true
+            unique: true,
+            defaultValue: Sequelize.UUIDV1
         },
         nama: {
             type: DataTypes.STRING
@@ -26,25 +27,26 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             isUnique: true,
             validate: {
-                isUnique: sequelize.validateIsUnique('nim', 'Maaf, NIM yang kamu masukan telah terdaftar')
+                isUnique: sequelize.validateIsUnique('nim', 'Afwan, NIM telah terdaftar')
             }
         },
         programStudi: {
-            type: DataTypes.STRING
+            type: DataTypes.BOOLEAN
         },
         tahunAngkatan: {
-            type: DataTypes.STRING
+            type: DataTypes.BOOLEAN
         },
         email: {
             type: DataTypes.STRING,
             isUnique: true,
             validate: {
                 isEmail: true,
-                isUnique: sequelize.validateIsUnique('email', 'Maaf, Email yang kamu masukan telah terdaftar')
+                isUnique: sequelize.validateIsUnique('email', 'Afwan, Email telah terdaftar')
             }
         },
         password: {
-            type: DataTypes.STRING
+            type: DataTypes.STRING,
+            defaultValue: ''
         },
         createdAt: {
             type: DataTypes.DATE

@@ -12,7 +12,8 @@ module.exports = {
             userUuid: {
                 allowNull: true,
                 type: Sequelize.UUID,
-                unique: true
+                unique: true,
+                defaultValue: Sequelize.UUIDV1
             },
             nama: {
                 type: Sequelize.STRING
@@ -22,17 +23,18 @@ module.exports = {
                 unique: true
             },
             programStudi: {
-                type: Sequelize.STRING
+                type: Sequelize.BOOLEAN
             },
             tahunAngkatan: {
-                type: Sequelize.STRING
+                type: Sequelize.BOOLEAN
             },
             email: {
                 type: Sequelize.STRING,
                 unique: true
             },
             password: {
-                type: Sequelize.STRING
+                type: Sequelize.STRING,
+                defaultValue: ''
             },
             createdAt: {
                 type: Sequelize.DATE
