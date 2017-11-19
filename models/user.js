@@ -77,14 +77,22 @@ module.exports = (sequelize, DataTypes) => {
                     if (err) {
                         return next(err);
                     }
-                    Bcrypt.hash(user.password, salt, (err, hash) => {
 
-                        if (err) {
-                            return next(err);
-                        }
-                        user.password = hash;
+                    if (user.password.length === 0) {
+                        user.password = '';
                         next();
-                    });
+                    }
+                    else {
+                        Bcrypt.hash(user.password, salt, (err, hash) => {
+
+                            if (err) {
+                                return next(err);
+                            }
+                            user.password = hash;
+                            next();
+                        });
+                    }
+
                 });
             }
         },
