@@ -2,6 +2,8 @@
 
 const Bcrypt = require('bcrypt'); // We don't want to store password with out encryption
 const saltRounds = 10; // see: (https://github.com/kelektiv/node.bcrypt.js#a-note-on-rounds)
+const Sequelize = require('sequelize');
+require('sequelize-isunique-validator')(Sequelize);
 
 module.exports = (sequelize, DataTypes) => {
 
@@ -22,7 +24,10 @@ module.exports = (sequelize, DataTypes) => {
         },
         nim: {
             type: DataTypes.STRING,
-            unique: true
+            isUnique: true,
+            validate: {
+                isUnique: sequelize.validateIsUnique('nim', 'Maaf, NIM yang kamu masukan telah terdaftar')
+            }
         },
         programStudi: {
             type: DataTypes.STRING
@@ -32,7 +37,11 @@ module.exports = (sequelize, DataTypes) => {
         },
         email: {
             type: DataTypes.STRING,
-            unique: true
+            isUnique: true,
+            validate: {
+                isEmail: true,
+                isUnique: sequelize.validateIsUnique('email', 'Maaf, Email yang kamu masukan telah terdaftar')
+            }
         },
         password: {
             type: DataTypes.STRING
@@ -92,4 +101,3 @@ module.exports = (sequelize, DataTypes) => {
 
     return User;
 };
-
