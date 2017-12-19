@@ -1,10 +1,12 @@
 'use strict';
 
-const Models = require('../models');
-const Bcrypt = require('bcrypt');
-const Boom = require('boom');
-const JwToken = require('../plugins/jwToken');
+const Models    = require('../models');
+const Bcrypt    = require('bcrypt');
+const Boom      = require('boom');
+const JwToken   = require('../plugins/jwToken');
 const Sequelize = require('sequelize');
+const Axios     = require('axios');
+const Querystring = require('querystring');
 
 module.exports = {
 
@@ -80,6 +82,33 @@ module.exports = {
             return reply(err);
 
         });
+    },
+
+    loginSisfo: (request, reply) => {
+
+        Axios.post('https://info.nurulfikri.ac.id/sisfo/api/user/', Querystring.stringify({
+            token: request.payload.token,
+            nim: request.payload.nim,
+            password: request.payload.password
+        })
+        ).then((response) => {
+
+            console.log(response.data);
+
+            // reply({
+            //     statusCode: 200,
+            //     data: response.data
+            // }).code(200);
+
+            reply(response.data).code(200);
+
+        }).catch((error) => {
+
+            console.log(error);
+            reply(error);
+
+        });
+
     }
 
 };
