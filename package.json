@@ -26,6 +26,7 @@
   },
   "homepage": "https://github.com/nodejs-indonesia/hapi-starter#readme",
   "dependencies": {
+    "axios": "^0.17.1",
     "bcrypt": "^1.0.3",
     "boom": "^6.0.0",
     "config": "^1.27.0",
