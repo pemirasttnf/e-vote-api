@@ -1,0 +1,70 @@
+'use strict';
+
+const Uuidv4 = require('uuid/v4');
+
+module.exports = {
+    up: (queryInterface, Sequelize) => {
+    /*
+      Add altering commands here.
+      Return a promise to correctly handle asynchronicity.
+
+      Example:
+      return queryInterface.bulkInsert('Person', [{
+        name: 'John Doe',
+        isBetaMember: false
+      }], {});
+    */
+        return queryInterface.bulkInsert('Candidate', [{
+            candidateUuid: Uuidv4(),
+            candidateNumber: 1,
+            name: 'Ahmad Imaduddin',
+            nim: '0110215010',
+            position: 'Presiden Mahasiswa',
+            studyProgram: 'Teknik Informatika',
+            generationYears: '2015',
+            createdAt: new Date(),
+            updatedAt: new Date()
+        }, {
+            candidateUuid: Uuidv4(),
+            candidateNumber: 1,
+            name: 'Haya Rasikhah',
+            nim: '0110216065',
+            position: 'Wakil Presiden Mahasiswa',
+            studyProgram: 'Teknik Informatika',
+            generationYears: '2016',
+            createdAt: new Date(),
+            updatedAt: new Date()
+        }, {
+            candidateUuid: Uuidv4(),
+            candidateNumber: 2,
+            name: 'Muhammad Abdul Karim',
+            nim: '0110215053',
+            position: 'Presiden Mahasiswa',
+            studyProgram: 'Teknik Informatika',
+            generationYears: '2015',
+            createdAt: new Date(),
+            updatedAt: new Date()
+        }, {
+            candidateUuid: Uuidv4(),
+            candidateNumber: 2,
+            name: 'Chairin Nashrillah',
+            nim: '0110116019',
+            position: 'Wakil Presiden Mahasiswa',
+            studyProgram: 'Sistem Informasi',
+            generationYears: '2016',
+            createdAt: new Date(),
+            updatedAt: new Date()
+        }], {});
+    },
+
+    down: (queryInterface, Sequelize) => {
+    /*
+      Add reverting commands here.
+      Return a promise to correctly handle asynchronicity.
+
+      Example:
+      return queryInterface.bulkDelete('Person', null, {});
+    */
+        return queryInterface.bulkDelete('Candidate', null, {});
+    }
+};
