@@ -20,33 +20,21 @@ module.exports = (sequelize, DataTypes) => {
             unique: true,
             defaultValue: Sequelize.UUIDV1
         },
-        nama: {
+        name: {
             type: DataTypes.STRING
         },
         nim: {
             type: DataTypes.STRING,
-            isUnique: true,
-            validate: {
-                isUnique: sequelize.validateIsUnique('nim', 'Afwan, NIM telah terdaftar')
-            }
+            unique: true
         },
-        programStudi: {
+        studyProgram: {
             type: DataTypes.BOOLEAN
         },
-        tahunAngkatan: {
+        status: {
+            type: DataTypes.STRING
+        },
+        generationYears: {
             type: DataTypes.BOOLEAN
-        },
-        email: {
-            type: DataTypes.STRING,
-            isUnique: true,
-            validate: {
-                isEmail: true,
-                isUnique: sequelize.validateIsUnique('email', 'Afwan, Email telah terdaftar')
-            }
-        },
-        password: {
-            type: DataTypes.STRING,
-            defaultValue: ''
         },
         createdAt: {
             type: DataTypes.DATE
@@ -65,6 +53,9 @@ module.exports = (sequelize, DataTypes) => {
         classMethods: {
             associate: function (models) {
                 // associations can be defined here
+                User.hasOne(models.Vote, {
+                    foreignKey: 'userId'
+                });
 
             }
         },
