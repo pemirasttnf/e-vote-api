@@ -2,18 +2,21 @@
 module.exports = {
     up: (queryInterface, Sequelize) => {
 
-        return queryInterface.createTable('User', {
-            userId: {
+        return queryInterface.createTable('Candidate', {
+            candidateId: {
                 allowNull: false,
                 autoIncrement: true,
                 primaryKey: true,
                 type: Sequelize.INTEGER
             },
-            userUuid: {
+            candidateUuid: {
                 allowNull: true,
                 type: Sequelize.UUID,
                 unique: true,
                 defaultValue: Sequelize.UUIDV1
+            },
+            candidateNumber: {
+                type: Sequelize.INTEGER
             },
             name: {
                 type: Sequelize.STRING
@@ -22,14 +25,14 @@ module.exports = {
                 type: Sequelize.STRING,
                 unique: true
             },
-            studyProgram: {
-                type: Sequelize.BOOLEAN
+            position: {
+                type: Sequelize.STRING
             },
-            status: {
+            studyProgram: {
                 type: Sequelize.STRING
             },
             generationYears: {
-                type: Sequelize.BOOLEAN
+                type: Sequelize.STRING
             },
             createdAt: {
                 type: Sequelize.DATE
@@ -41,6 +44,6 @@ module.exports = {
     },
     down: (queryInterface, Sequelize) => {
 
-        return queryInterface.dropTable('User');
+        return queryInterface.dropTable('Candidate');
     }
 };
