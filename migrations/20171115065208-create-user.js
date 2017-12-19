@@ -18,6 +18,13 @@ module.exports = {
             name: {
                 type: Sequelize.STRING
             },
+            email: {
+                type: Sequelize.STRING,
+                unique: true
+            },
+            password: {
+                type: Sequelize.STRING
+            },
             nim: {
                 type: Sequelize.STRING,
                 unique: true
