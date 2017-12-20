@@ -22,7 +22,8 @@ module.exports = [{
 },
 
 { method: 'POST',   path: apiUrl + '/auth/login', config: { auth: false }, handler: Controllers.auth.loginSisfo },
-{ method: 'GET',    path: apiUrl + '/users', config: { auth: false }, handler: Controllers.user.listUser },
+{ method: 'GET',    path: apiUrl + '/candidates', config: { auth: false }, handler: Controllers.candidate.listCandidate },
+{ method: 'GET',    path: apiUrl + '/voters', config: { auth: false }, handler: Controllers.user.listUser },
 { method: 'GET',    path: apiUrl + '/votes', config: { auth: false }, handler: Controllers.vote.listVote },
 { method: 'GET',    path: apiUrl + '/votes/users', config: { auth: false }, handler: Controllers.vote.listVoteWithUser },
 { method: 'POST',   path: apiUrl + '/votes', handler: Controllers.vote.createVote },
