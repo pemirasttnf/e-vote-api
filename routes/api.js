@@ -25,7 +25,9 @@ module.exports = [{
 { method: 'GET',    path: apiUrl + '/candidates', config: { auth: false }, handler: Controllers.candidate.listCandidate },
 { method: 'GET',    path: apiUrl + '/voters', config: { auth: false }, handler: Controllers.user.listUser },
 { method: 'GET',    path: apiUrl + '/votes', config: { auth: false }, handler: Controllers.vote.listVote },
-{ method: 'GET',    path: apiUrl + '/votes/users', config: { auth: false }, handler: Controllers.vote.listVoteWithUser },
+{ method: 'GET',    path: apiUrl + '/votes/ahmad/total', config: { auth: false }, handler: Controllers.vote.listVoteCandidateAhmad },
+{ method: 'GET',    path: apiUrl + '/votes/karim/total', config: { auth: false }, handler: Controllers.vote.listVoteCandidateKarim },
+{ method: 'GET',    path: apiUrl + '/votes/voters', config: { auth: false }, handler: Controllers.vote.listVoteWithUser },
 { method: 'POST',   path: apiUrl + '/votes', handler: Controllers.vote.createVote },
 { method: 'GET',    path: apiUrl + '/votes/{voteUuid}', config: { auth: false }, handler: Controllers.vote.getVote }
 // { method: 'DELETE', path: apiUrl + '/votes/{voteUuid}', handler: Controllers.vote.deleteVote }

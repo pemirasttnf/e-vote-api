@@ -55,6 +55,56 @@ module.exports = {
         });
     },
 
+    listVoteCandidateAhmad: (request, reply) => {
+
+        Models.Vote.findAndCountAll({
+            where: {
+                $or: [{ vote: 1 }, { vote: 2 }]
+            }
+        }).then((vote) => {
+
+            if (!vote) {
+                return reply(Boom.notFound('Vote does not exist.'));
+            }
+
+            return reply({
+                statusCode: 200,
+                total: vote.count,
+                data: vote.rows
+            }).code(200);
+
+        }).catch((err) => {
+
+            return reply(err);
+
+        });
+    },
+
+    listVoteCandidateKarim: (request, reply) => {
+
+        Models.Vote.findAndCountAll({
+            where: {
+                $or: [{ vote: 3 }, { vote: 4 }]
+            }
+        }).then((vote) => {
+
+            if (!vote) {
+                return reply(Boom.notFound('Vote does not exist.'));
+            }
+
+            return reply({
+                statusCode: 200,
+                total: vote.count,
+                data: vote.rows
+            }).code(200);
+
+        }).catch((err) => {
+
+            return reply(err);
+
+        });
+    },
+
     createVote: (request, reply) => {
 
         const currentUser = request.auth.credentials.user;
