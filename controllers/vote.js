@@ -7,6 +7,27 @@ module.exports = {
 
     listVote: (request, reply) => {
 
+        Models.Vote.findAndCountAll().then((vote) => {
+
+            if (!vote) {
+                return reply(Boom.notFound('Vote does not exist.'));
+            }
+
+            return reply({
+                statusCode: 200,
+                total: vote.count,
+                data: vote.rows
+            }).code(200);
+
+        }).catch((err) => {
+
+            return reply(err);
+
+        });
+    },
+
+    listVoteWithUser: (request, reply) => {
+
         Models.Vote.findAndCountAll({
             include: [{
                 model: Models.User,
@@ -37,47 +58,32 @@ module.exports = {
 
         const attributes = request.payload;
 
-        Models.User.findOne({
+        Models.Vote.findOne({
             where: {
-                userId: currentUser.userId
+                nim: currentUser.nim
             }
-        }).then((user, err) => {
+        }).then((vote, err) => {
 
-            if (!user) {
-                return reply(Boom.notFound('Sorry, Account not found!'));
+            if (vote) {
+                return reply(Boom.forbidden('Terima kasih, anda sebelumnya telah memberikan suara!'));
             }
 
-            Models.Vote.findOne({
-                where: {
-                    userId: currentUser.userId
-                }
-            }).then((vote, err) => {
+            attributes.nim = currentUser.nim;
 
-                if (vote) {
-                    return reply(Boom.forbidden('Terima kasih, anda sebelumnya telah memberikan testimoni!'));
-                }
+            Models.Vote.create(attributes).then((vote) => {
 
-                attributes.userId = currentUser.userId;
+                return reply({
+                    statusCode: 200,
+                    data: vote
+                }).code(200);
 
-                Models.Vote.create(attributes).then((vote) => {
+            }).catch((err) => {
 
-                    return reply({
-                        statusCode: 200,
-                        data: vote
-                    }).code(200);
+                return reply(err);
 
-                }).catch((err) => {
-
-                    return reply(err);
-
-                });
             });
-
-        }).catch((err) => {
-
-            return reply(err);
-
         });
+
     },
 
     getVote: (request, reply) => {

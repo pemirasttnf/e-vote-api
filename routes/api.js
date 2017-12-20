@@ -21,13 +21,12 @@ module.exports = [{
     }
 },
 
-{ method: 'POST',   path: apiUrl + '/auth/register', config: { auth: false }, handler: Controllers.auth.register },
-{ method: 'POST',   path: apiUrl + '/auth/login', config: { auth: false }, handler: Controllers.auth.login },
-{ method: 'POST',   path: apiUrl + '/auth/login/sisfo', config: { auth: false }, handler: Controllers.auth.loginSisfo },
+{ method: 'POST',   path: apiUrl + '/auth/login', config: { auth: false }, handler: Controllers.auth.loginSisfo },
 { method: 'GET',    path: apiUrl + '/users', config: { auth: false }, handler: Controllers.user.listUser },
 { method: 'GET',    path: apiUrl + '/votes', config: { auth: false }, handler: Controllers.vote.listVote },
-{ method: 'POST',   path: apiUrl + '/votes', config: { auth: false }, handler: Controllers.vote.createVote },
-{ method: 'GET',    path: apiUrl + '/votes/{voteUuid}', config: { auth: false }, handler: Controllers.vote.getVote },
-{ method: 'DELETE', path: apiUrl + '/votes/{voteUuid}', config: { auth: false }, handler: Controllers.vote.deleteVote }
+{ method: 'GET',    path: apiUrl + '/votes/users', config: { auth: false }, handler: Controllers.vote.listVoteWithUser },
+{ method: 'POST',   path: apiUrl + '/votes', handler: Controllers.vote.createVote },
+{ method: 'GET',    path: apiUrl + '/votes/{voteUuid}', config: { auth: false }, handler: Controllers.vote.getVote }
+// { method: 'DELETE', path: apiUrl + '/votes/{voteUuid}', handler: Controllers.vote.deleteVote }
 
 ];
