@@ -24,6 +24,9 @@ module.exports = {
                 onUpdate: 'cascade',
                 onDelete: 'cascade'
             },
+            nim: {
+                type: Sequelize.STRING
+            },
             vote: {
                 type: Sequelize.INTEGER,
                 references: {

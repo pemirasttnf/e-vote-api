@@ -26,6 +26,9 @@ module.exports = (sequelize, DataTypes) => {
             onUpdate: 'cascade',
             onDelete: 'cascade'
         },
+        nim: {
+            type: DataTypes.STRING
+        },
         vote: {
             type: DataTypes.INTEGER,
             references: {
@@ -57,10 +60,10 @@ module.exports = (sequelize, DataTypes) => {
                     foreignKey: 'userId'
                 });
 
-                Vote.belongsTo(models.Candidate, {
-                    as: 'candidate',
-                    foreignKey: 'candidateId'
-                });
+                // Vote.belongsTo(models.Candidate, {
+                //     as: 'candidate',
+                //     foreignKey: 'candidateId'
+                // });
 
             }
         }

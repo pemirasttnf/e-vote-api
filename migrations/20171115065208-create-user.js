@@ -29,14 +29,17 @@ module.exports = {
                 type: Sequelize.STRING,
                 unique: true
             },
-            studyProgram: {
-                type: Sequelize.BOOLEAN
+            programStudi: {
+                type: Sequelize.STRING
             },
             status: {
                 type: Sequelize.STRING
             },
-            generationYears: {
-                type: Sequelize.BOOLEAN
+            tahunAngkatan: {
+                type: Sequelize.STRING
+            },
+            avatar: {
+                type: Sequelize.STRING
             },
             createdAt: {
                 type: Sequelize.DATE
