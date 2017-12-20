@@ -31,7 +31,10 @@ module.exports = {
         Models.Vote.findAndCountAll({
             include: [{
                 model: Models.User,
-                as: 'user'
+                as: 'user',
+                attributes: [
+                    'name', 'nim', 'programStudi', 'status', 'tahunAngkatan', 'avatar'
+                ]
             }]
         }).then((vote) => {
 
