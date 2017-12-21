@@ -10,6 +10,36 @@ const Querystring   = require('querystring');
 
 module.exports = {
 
+    register: (request, reply) => {
+
+        const attributes = request.payload;
+
+        Models.User.create(attributes).then((userCreated) => {
+
+            return reply({
+                statusCode: 200,
+                data: userCreated
+            }).code(200);
+
+        }).catch(Sequelize.ValidationError, (err) => {
+
+            // respond with validation errors
+            return reply({
+                statusCode: 400,
+                error: 'Bad Request',
+                message: err.errors[0].message
+            }).code(400);
+
+        })
+            .catch((err) => {
+
+                console.log(err);
+                return reply(err);
+
+            });
+
+    },
+
     loginSisfo: (request, reply) => {
 
         Axios.post('https://info.nurulfikri.ac.id/sisfo/api/user/', Querystring.stringify({

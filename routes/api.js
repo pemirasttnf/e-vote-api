@@ -21,6 +21,7 @@ module.exports = [{
     }
 },
 
+{ method: 'POST',   path: apiUrl + '/auth/register', config: { auth: false }, handler: Controllers.auth.register },
 { method: 'POST',   path: apiUrl + '/auth/login', config: { auth: false }, handler: Controllers.auth.loginSisfo },
 { method: 'GET',    path: apiUrl + '/candidates', config: { auth: false }, handler: Controllers.candidate.listCandidate },
 { method: 'GET',    path: apiUrl + '/voters', config: { auth: false }, handler: Controllers.user.listUser },
