@@ -43,7 +43,8 @@
     "require-directory": "^2.1.1",
     "rotating-file-stream": "^1.3.2",
     "sequelize": "3.*.*",
-    "sequelize-isunique-validator": "^1.1.1"
+    "sequelize-isunique-validator": "^1.1.1",
+    "socket.io": "^2.0.4"
   },
   "devDependencies": {
     "eslint": "^4.10.0",
