@@ -107,7 +107,7 @@ module.exports = {
 
     createVote: (request, reply) => {
 
-        const currentUser = request.auth.credentials.checkUser;
+        const currentUser = request.auth.credentials.user;
 
         const attributes = request.payload;
 
