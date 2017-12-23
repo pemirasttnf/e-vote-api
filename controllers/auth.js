@@ -91,17 +91,17 @@ module.exports = {
 
                     });
                 }
-                // else {
-                //     return reply(Boom.notFound('Sorry, Kamu telah login!'));
-                // }
+                else {
+                    return reply(Boom.forbidden('Sorry, Kamu telah login!'));
+                }
 
-                reply({
-                    statusCode: 200,
-                    data: checkUser,
-                    secretToken: JwToken.issue({
-                        checkUser
-                    })
-                }).code(200);
+                // reply({
+                //     statusCode: 200,
+                //     data: checkUser,
+                //     secretToken: JwToken.issue({
+                //         checkUser
+                //     })
+                // }).code(200);
 
             });
         }).catch((error) => {
