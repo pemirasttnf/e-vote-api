@@ -60,17 +60,9 @@ module.exports = {
                 'avatar': results.data.url_foto
             };
 
-            // reply({
-            //     statusCode: 200,
-            //     data: userObject,
-            //     secretToken: JwToken.issue({
-            //         userObject
-            //     })
-            // }).code(200);
-
             Models.User.findOne({
                 where: {
-                    nim: results.data.nim
+                    nim: request.payload.nim
                 }
             }).then((checkUser, error) => {
 

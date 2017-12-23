@@ -107,7 +107,7 @@ module.exports = {
 
     createVote: (request, reply) => {
 
-        const currentUser = request.auth.credentials.user;
+        const currentUser = request.auth.credentials.checkUser;
 
         const attributes = request.payload;
 
@@ -121,6 +121,7 @@ module.exports = {
                 return reply(Boom.forbidden('Terima kasih, anda sebelumnya telah memberikan suara!'));
             }
 
+            attributes.userId = currentUser.userId;
             attributes.nim = currentUser.nim;
 
             Models.Vote.create(attributes).then((vote) => {
