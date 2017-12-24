@@ -31,6 +31,7 @@
     "boom": "^6.0.0",
     "config": "^1.27.0",
     "dotenv": "^4.0.0",
+    "events": "^1.1.1",
     "good": "^7.3.0",
     "good-console": "^6.4.0",
     "good-file": "^6.0.1",
