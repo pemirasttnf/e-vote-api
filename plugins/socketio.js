@@ -24,7 +24,7 @@ exports.register = function (server, options, next) {
             socket.emit('getVote', data);
         });
 
-        //Tell all clients that someone connected
+        // Tell all clients that someone connected
         // socket.emit('userJoined', socket.id);
 
 
