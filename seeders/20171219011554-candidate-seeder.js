@@ -26,32 +26,12 @@ module.exports = {
             updatedAt: new Date()
         }, {
             candidateUuid: Uuidv4(),
-            candidateNumber: 1,
-            name: 'Haya Rasikhah',
-            nim: '0110216065',
-            position: 'Wakil Presiden Mahasiswa',
-            studyProgram: 'Teknik Informatika',
-            generationYears: '2016',
-            createdAt: new Date(),
-            updatedAt: new Date()
-        }, {
-            candidateUuid: Uuidv4(),
             candidateNumber: 2,
             name: 'Muhammad Abdul Karim',
             nim: '0110215053',
             position: 'Presiden Mahasiswa',
             studyProgram: 'Teknik Informatika',
             generationYears: '2015',
-            createdAt: new Date(),
-            updatedAt: new Date()
-        }, {
-            candidateUuid: Uuidv4(),
-            candidateNumber: 2,
-            name: 'Chairin Nashrillah',
-            nim: '0110116019',
-            position: 'Wakil Presiden Mahasiswa',
-            studyProgram: 'Sistem Informasi',
-            generationYears: '2016',
             createdAt: new Date(),
             updatedAt: new Date()
         }], {});
