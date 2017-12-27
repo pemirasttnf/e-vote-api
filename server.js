@@ -12,7 +12,7 @@ const Models        = require('./models'); // Add the Models
 
 // Server Config
 server.connection(_.pick(Config, ['host', 'port', 'routes', 'labels']));
-server.connection({ port: 4000, labels: ['websocket'] });
+server.connection({ port: process.env.WEBSOCKET_PORT, labels: ['websocket'] });
 
 // Export the server to be required elsewhere.
 module.exports = server;
