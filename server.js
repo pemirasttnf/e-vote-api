@@ -1,18 +1,18 @@
 'use strict';
 
-const Hapi      = require('hapi');
-// const Path      = require('path');
-const _         = require('lodash');
-const JwToken   = require('./plugins/jwToken'); // bring your own validation function
-const server    = new Hapi.Server(); // Create a server with a host and port
-const Config    = require('./config/app'); // Config app
-const Routes    = require('./routes'); // Add the route
-const Plugins   = require('./plugins'); // Load Plugins
-const Models    = require('./models'); // Add the Models
-
+const Hapi          = require('hapi');
+// const Path       = require('path');
+const _             = require('lodash');
+const JwToken       = require('./plugins/jwToken'); // bring your own validation function
+const server        = new Hapi.Server(); // Create a server with a host and port
+const Config        = require('./config/app'); // Config app
+const Routes        = require('./routes'); // Add the route
+const Plugins       = require('./plugins'); // Load Plugins
+const Models        = require('./models'); // Add the Models
 
 // Server Config
-server.connection(_.pick(Config, ['host', 'port', 'routes']));
+server.connection(_.pick(Config, ['host', 'port', 'routes', 'labels']));
+server.connection({ port: 4000, labels: ['websocket'] });
 
 // Export the server to be required elsewhere.
 module.exports = server;
@@ -23,7 +23,7 @@ server.register(Plugins, (err) => {
         console.log('error', 'failed to install Plugins');
         console.log(err);
         throw err;
-    };
+    }
 
     console.log('info', 'Plugins registered');
 
@@ -89,7 +89,7 @@ server.register(Plugins, (err) => {
 
         initDb(() => {
 
-            console.log(`Server running at: ${server.info.uri}`);
+            console.log(`Server running at: ${server.select('app').info.uri}`);
 
         });
 
