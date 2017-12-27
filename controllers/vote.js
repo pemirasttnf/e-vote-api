@@ -1,9 +1,13 @@
 'use strict';
 
-const Models = require('../models');
-const Boom = require('boom');
+const Models        = require('../models');
+const Boom          = require('boom');
+const EventEmitter  = require('events');
+const notifier      = new EventEmitter().setMaxListeners(0);
 
 module.exports = {
+
+    notifier,
 
     listVote: (request, reply) => {
 
@@ -59,7 +63,7 @@ module.exports = {
 
         Models.Vote.findAndCountAll({
             where: {
-                $or: [{ vote: 1 }, { vote: 2 }]
+                vote: 1
             }
         }).then((vote) => {
 
@@ -84,7 +88,7 @@ module.exports = {
 
         Models.Vote.findAndCountAll({
             where: {
-                $or: [{ vote: 3 }, { vote: 4 }]
+                vote: 2
             }
         }).then((vote) => {
 
@@ -126,10 +130,30 @@ module.exports = {
 
             Models.Vote.create(attributes).then((vote) => {
 
-                return reply({
+                reply({
                     statusCode: 200,
                     data: vote
                 }).code(200);
+
+                Models.Vote.findAndCountAll({
+                    where: {
+                        vote: 1
+                    }
+                }).then((vote) => {
+
+                    notifier.emit('listVoteCandidateAhmad', vote);
+
+                })
+
+                Models.Vote.findAndCountAll({
+                    where: {
+                        vote: 2
+                    }
+                }).then((vote) => {
+
+                    notifier.emit('listVoteCandidateKarim', vote);
+
+                })
 
             }).catch((err) => {
 
@@ -138,95 +162,7 @@ module.exports = {
             });
         });
 
-    },
-
-    getVote: (request, reply) => {
-
-        Models.Vote.findOne({
-            where: {
-                voteUuid: request.params.voteUuid
-            }
-        }).then((vote) => {
-
-            if (!vote) {
-                return reply(Boom.notFound('Vote does not exist.'));
-            }
-
-            return reply({
-                statusCode: 200,
-                data: vote
-            }).code(200);
-
-        }).catch((err) => {
-
-            return reply(err);
-
-        });
-    },
-
-    updateVote: (request, reply) => {
-
-        Models.Vote.findOne({
-            where: {
-                voteUuid: request.params.voteUuid
-            }
-        }).then((vote, err) => {
-
-            if (!vote) {
-                return reply(Boom.notFound('Vote does not exist.'));
-            }
-
-            const attributes = request.payload;
-            Models.Vote.update(attributes, {
-                where: {
-                    voteUuid: request.params.voteUuid
-                }
-            }).then((voteUpdate) => {
-
-                return reply({
-                    statusCode: 200,
-                    message: 'Vote has been successfully updated'
-                }).code(200);
-            });
-
-        }).catch((err) => {
-
-            return reply(err);
-
-        });
-    },
-
-    deleteVote: (request, reply) => {
-
-        Models.Vote.findOne({
-            where: {
-                voteUuid: request.params.voteUuid
-            }
-        }).then((vote, err) => {
-
-            if (!vote) {
-                return reply(Boom.notFound('Vote does not exist.'));
-            }
-
-            Models.Vote.destroy({
-                where: {
-                    voteUuid: request.params.voteUuid
-                }
-            }).then((voteUpdate) => {
-
-                return reply({
-                    statusCode: 200,
-                    message: 'Vote has been successfully deleted'
-                }).code(200);
-            });
-
-        }).catch((err) => {
-
-            return reply(err);
-
-        });
     }
-
 
 
 };
