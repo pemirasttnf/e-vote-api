@@ -153,7 +153,7 @@ module.exports = {
 
                     notifier.emit('listVoteCandidateKarim', vote);
 
-                })
+                });
 
             }).catch((err) => {
 
