@@ -15,12 +15,18 @@ exports.register = function (server, options, next) {
         socket.emit('message',{ message: 'Hello From Server :)' });
 
         vote.on('listVoteCandidateAhmad', (data) => {
-            socket.emit('listVoteCandidateAhmad', data);
+            socket.emit('listVoteCandidateAhmad', {
+                result: data,
+                relativeTime: new Date().toLocaleString()
+            });
             socket.emit('getVote', data);
         });
 
         vote.on('listVoteCandidateKarim', (data) => {
-            socket.emit('listVoteCandidateKarim', data);
+            socket.emit('listVoteCandidateKarim', {
+                result: data,
+                relativeTime: new Date().toLocaleString()
+            });
             socket.emit('getVote', data);
         });
 
