@@ -27,8 +27,52 @@ exports.register = function (server, options, next) {
                 result: data,
                 relativeTime: new Date().toLocaleString()
             });
+
             socket.emit('getVote', data);
         });
+
+        vote.on('getTI', (data) => {
+            socket.emit('getTI', {
+                result: data,
+                relativeTime: new Date().toLocaleString()
+            });
+        });
+
+        vote.on('getSI', (data) => {
+            socket.emit('getSI', {
+                result: data,
+                relativeTime: new Date().toLocaleString()
+            });
+        });
+
+        vote.on('get2014', (data) => {
+            socket.emit('get2014', {
+                result: data,
+                relativeTime: new Date().toLocaleString()
+            });
+        });
+
+        vote.on('get2015', (data) => {
+            socket.emit('get2015', {
+                result: data,
+                relativeTime: new Date().toLocaleString()
+            });
+        });
+
+        vote.on('get2016', (data) => {
+            socket.emit('get2016', {
+                result: data,
+                relativeTime: new Date().toLocaleString()
+            });
+        });
+
+        vote.on('get2017', (data) => {
+            socket.emit('get2017', {
+                result: data,
+                relativeTime: new Date().toLocaleString()
+            });
+        });
+
 
         // Tell all clients that someone connected
         // socket.emit('userJoined', socket.id);

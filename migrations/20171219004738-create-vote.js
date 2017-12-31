@@ -27,6 +27,12 @@ module.exports = {
             nim: {
                 type: Sequelize.STRING
             },
+            programStudi: {
+                type: Sequelize.STRING
+            },
+            tahunAngkatan: {
+                type: Sequelize.STRING
+            },
             vote: {
                 type: Sequelize.INTEGER,
                 references: {

@@ -115,52 +115,116 @@ module.exports = {
 
         const attributes = request.payload;
 
-        Models.Vote.findOne({
-            where: {
-                nim: currentUser.nim
-            }
-        }).then((vote, err) => {
+        attributes.userId = currentUser.userId;
+        attributes.nim = currentUser.nim;
+        attributes.programStudi = currentUser.programStudi;
+        attributes.tahunAngkatan = currentUser.tahunAngkatan;
 
-            if (vote) {
-                return reply(Boom.forbidden('Terima kasih, anda sebelumnya telah memberikan suara!'));
-            }
+        Models.Vote.create(attributes).then((vote) => {
 
-            attributes.userId = currentUser.userId;
-            attributes.nim = currentUser.nim;
+            reply({
+                statusCode: 200,
+                data: vote
+            }).code(200);
 
-            Models.Vote.create(attributes).then((vote) => {
+            Models.Vote.findAndCountAll({
+                where: {
+                    vote: 1
+                }
+            }).then((vote) => {
 
-                reply({
-                    statusCode: 200,
-                    data: vote
-                }).code(200);
-
-                Models.Vote.findAndCountAll({
-                    where: {
-                        vote: 1
-                    }
-                }).then((vote) => {
-
-                    notifier.emit('listVoteCandidateAhmad', vote);
-
-                })
-
-                Models.Vote.findAndCountAll({
-                    where: {
-                        vote: 2
-                    }
-                }).then((vote) => {
-
-                    notifier.emit('listVoteCandidateKarim', vote);
-
-                });
-
-            }).catch((err) => {
-
-                return reply(err);
+                notifier.emit('listVoteCandidateAhmad', vote);
 
             });
+
+            Models.Vote.findAndCountAll({
+                where: {
+                    vote: 2
+                }
+            }).then((vote) => {
+
+                notifier.emit('listVoteCandidateKarim', vote);
+
+            });
+
+            Models.Vote.findAndCountAll({
+                where: {
+                    programStudi: 'Teknik Informatika'
+                }
+            }).then((vote) => {
+
+                notifier.emit('getTI', vote);
+
+            });
+
+            Models.Vote.findAndCountAll({
+                where: {
+                    programStudi: 'Sistem Informasi'
+                }
+            }).then((vote) => {
+
+                notifier.emit('getSI', vote);
+
+            });
+
+            Models.Vote.findAndCountAll({
+                where: {
+                    tahunAngkatan: 2014
+                }
+            }).then((vote) => {
+
+                notifier.emit('get2014', vote);
+
+            });
+
+            Models.Vote.findAndCountAll({
+                where: {
+                    tahunAngkatan: 2015
+                }
+            }).then((vote) => {
+
+                notifier.emit('get2015', vote);
+
+            });
+
+            Models.Vote.findAndCountAll({
+                where: {
+                    tahunAngkatan: 2016
+                }
+            }).then((vote) => {
+
+                notifier.emit('get2016', vote);
+
+            });
+
+            Models.Vote.findAndCountAll({
+                where: {
+                    tahunAngkatan: 2017
+                }
+            }).then((vote) => {
+
+                notifier.emit('get2017', vote);
+
+            });
+
+        }).catch((err) => {
+
+            return reply(err);
+
         });
+
+        // Models.Vote.findOne({
+        //     where: {
+        //         nim: currentUser.nim
+        //     }
+        // }).then((vote, err) => {
+        //
+        //     if (vote) {
+        //         return reply(Boom.forbidden('Terima kasih, anda sebelumnya telah memberikan suara!'));
+        //     }
+        //
+        //
+        // });
 
     }
 

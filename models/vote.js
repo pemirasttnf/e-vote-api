@@ -29,6 +29,12 @@ module.exports = (sequelize, DataTypes) => {
         nim: {
             type: DataTypes.STRING
         },
+        programStudi: {
+            type: DataTypes.STRING
+        },
+        tahunAngkatan: {
+            type: DataTypes.STRING
+        },
         vote: {
             type: DataTypes.INTEGER,
             references: {
