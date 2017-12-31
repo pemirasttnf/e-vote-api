@@ -19,7 +19,7 @@ exports.register = function (server, options, next) {
                 result: data,
                 relativeTime: new Date().toLocaleString()
             });
-            socket.emit('getVote', data);
+            // socket.emit('getVote', data);
         });
 
         vote.on('listVoteCandidateKarim', (data) => {
@@ -28,7 +28,7 @@ exports.register = function (server, options, next) {
                 relativeTime: new Date().toLocaleString()
             });
 
-            socket.emit('getVote', data);
+            // socket.emit('getVote', data);
         });
 
         vote.on('getTI', (data) => {

@@ -122,91 +122,116 @@ module.exports = {
 
         Models.Vote.create(attributes).then((vote) => {
 
+            const voteCandidate = vote.vote;
+            const programStudi = vote.programStudi;
+            const tahunAngkatan = vote.tahunAngkatan;
+
             reply({
                 statusCode: 200,
                 data: vote
             }).code(200);
 
-            Models.Vote.findAndCountAll({
-                where: {
-                    vote: 1
-                }
-            }).then((vote) => {
+            switch (voteCandidate) {
+                case '1':
+                    Models.Vote.findAndCountAll({
+                        where: {
+                            vote: 1
+                        }
+                    }).then((vote) => {
 
-                notifier.emit('listVoteCandidateAhmad', vote);
+                        notifier.emit('listVoteCandidateAhmad', vote);
 
-            });
+                    });
+                    break;
+                case '2':
+                    Models.Vote.findAndCountAll({
+                        where: {
+                            vote: 2
+                        }
+                    }).then((vote) => {
 
-            Models.Vote.findAndCountAll({
-                where: {
-                    vote: 2
-                }
-            }).then((vote) => {
+                        notifier.emit('listVoteCandidateKarim', vote);
 
-                notifier.emit('listVoteCandidateKarim', vote);
+                    });
+                    break;
+            }
 
-            });
+            switch (programStudi) {
+                case 'Teknik Informatika':
+                    Models.Vote.findAndCountAll({
+                        where: {
+                            programStudi: 'Teknik Informatika'
+                        }
+                    }).then((vote) => {
 
-            Models.Vote.findAndCountAll({
-                where: {
-                    programStudi: 'Teknik Informatika'
-                }
-            }).then((vote) => {
+                        notifier.emit('getTI', vote);
 
-                notifier.emit('getTI', vote);
+                    });
 
-            });
+                    break;
+                case 'Sistem Informasi':
+                    Models.Vote.findAndCountAll({
+                        where: {
+                            programStudi: 'Sistem Informasi'
+                        }
+                    }).then((vote) => {
 
-            Models.Vote.findAndCountAll({
-                where: {
-                    programStudi: 'Sistem Informasi'
-                }
-            }).then((vote) => {
+                        notifier.emit('getSI', vote);
 
-                notifier.emit('getSI', vote);
+                    });
+                    break;
+            }
 
-            });
+            switch (tahunAngkatan) {
+                case '2014':
+                    Models.Vote.findAndCountAll({
+                        where: {
+                            tahunAngkatan: 2014
+                        }
+                    }).then((vote) => {
 
-            Models.Vote.findAndCountAll({
-                where: {
-                    tahunAngkatan: 2014
-                }
-            }).then((vote) => {
+                        notifier.emit('get2014', vote);
 
-                notifier.emit('get2014', vote);
+                    });
 
-            });
+                    break;
+                case '2015':
+                    Models.Vote.findAndCountAll({
+                        where: {
+                            tahunAngkatan: 2015
+                        }
+                    }).then((vote) => {
 
-            Models.Vote.findAndCountAll({
-                where: {
-                    tahunAngkatan: 2015
-                }
-            }).then((vote) => {
+                        notifier.emit('get2015', vote);
 
-                notifier.emit('get2015', vote);
+                    });
 
-            });
+                    break;
+                case '2016':
+                    Models.Vote.findAndCountAll({
+                        where: {
+                            tahunAngkatan: 2016
+                        }
+                    }).then((vote) => {
 
-            Models.Vote.findAndCountAll({
-                where: {
-                    tahunAngkatan: 2016
-                }
-            }).then((vote) => {
+                        notifier.emit('get2016', vote);
 
-                notifier.emit('get2016', vote);
+                    });
 
-            });
+                    break;
+                case '2017':
+                    Models.Vote.findAndCountAll({
+                        where: {
+                            tahunAngkatan: 2017
+                        }
+                    }).then((vote) => {
 
-            Models.Vote.findAndCountAll({
-                where: {
-                    tahunAngkatan: 2017
-                }
-            }).then((vote) => {
+                        notifier.emit('get2017', vote);
 
-                notifier.emit('get2017', vote);
+                    });
 
-            });
-
+                    break;
+            }
         }).catch((err) => {
 
             return reply(err);
