@@ -1,6 +1,8 @@
 'use strict';
 
 const vote     = require('../controllers/vote').notifier;
+const user     = require('../controllers/auth').notifier;
+const Moment   = require('moment');
 
 exports.register = function (server, options, next) {
 
@@ -14,62 +16,66 @@ exports.register = function (server, options, next) {
 
         socket.emit('message',{ message: 'Hello From Server :)' });
 
-        vote.on('listVoteCandidateAhmad', (data) => {
-            socket.emit('listVoteCandidateAhmad', {
+        vote.on('VoteAhmad', (data) => {
+            socket.emit('VoteAhmad', {
                 result: data,
-                relativeTime: new Date().toLocaleString()
-            });
-            // socket.emit('getVote', data);
-        });
-
-        vote.on('listVoteCandidateKarim', (data) => {
-            socket.emit('listVoteCandidateKarim', {
-                result: data,
-                relativeTime: new Date().toLocaleString()
-            });
-
-            // socket.emit('getVote', data);
-        });
-
-        vote.on('getTI', (data) => {
-            socket.emit('getTI', {
-                result: data,
-                relativeTime: new Date().toLocaleString()
+                relativeTime: Moment().startOf('hour').fromNow()
             });
         });
 
-        vote.on('getSI', (data) => {
-            socket.emit('getSI', {
+        vote.on('VoteKarim', (data) => {
+            socket.emit('VoteKarim', {
                 result: data,
-                relativeTime: new Date().toLocaleString()
+                relativeTime: Moment().startOf('hour').fromNow()
             });
         });
 
-        vote.on('get2014', (data) => {
-            socket.emit('get2014', {
+        vote.on('VoteTI', (data) => {
+            socket.emit('VoteTI', {
                 result: data,
-                relativeTime: new Date().toLocaleString()
+                relativeTime: Moment().startOf('hour').fromNow()
             });
         });
 
-        vote.on('get2015', (data) => {
-            socket.emit('get2015', {
+        vote.on('VoteSI', (data) => {
+            socket.emit('VoteSI', {
                 result: data,
-                relativeTime: new Date().toLocaleString()
+                relativeTime: Moment().startOf('hour').fromNow()
             });
         });
 
-        vote.on('get2016', (data) => {
-            socket.emit('get2016', {
+        vote.on('Vote2014', (data) => {
+            socket.emit('Vote2014', {
                 result: data,
-                relativeTime: new Date().toLocaleString()
+                relativeTime: Moment().startOf('hour').fromNow()
             });
         });
 
-        vote.on('get2017', (data) => {
-            socket.emit('get2017', {
+        vote.on('Vote2015', (data) => {
+            socket.emit('Vote2015', {
                 result: data,
-                relativeTime: new Date().toLocaleString()
+                relativeTime: Moment().startOf('hour').fromNow()
+            });
+        });
+
+        vote.on('Vote2016', (data) => {
+            socket.emit('Vote2016', {
+                result: data,
+                relativeTime: Moment().startOf('hour').fromNow()
+            });
+        });
+
+        vote.on('Vote2017', (data) => {
+            socket.emit('Vote2017', {
+                result: data,
+                relativeTime: Moment().startOf('hour').fromNow()
+            });
+        });
+
+        user.on('UniqueCode', (data) => {
+            socket.emit('UniqueCode', {
+                result: data,
+                relativeTime: Moment().startOf('hour').fromNow()
             });
         });
 

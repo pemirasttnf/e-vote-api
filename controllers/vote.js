@@ -139,7 +139,7 @@ module.exports = {
                         }
                     }).then((vote) => {
 
-                        notifier.emit('listVoteCandidateAhmad', vote);
+                        notifier.emit('VoteAhmad', vote);
 
                     });
                     break;
@@ -150,7 +150,7 @@ module.exports = {
                         }
                     }).then((vote) => {
 
-                        notifier.emit('listVoteCandidateKarim', vote);
+                        notifier.emit('VoteKarim', vote);
 
                     });
                     break;
@@ -164,7 +164,7 @@ module.exports = {
                         }
                     }).then((vote) => {
 
-                        notifier.emit('getTI', vote);
+                        notifier.emit('VoteTI', vote);
 
                     });
 
@@ -176,7 +176,7 @@ module.exports = {
                         }
                     }).then((vote) => {
 
-                        notifier.emit('getSI', vote);
+                        notifier.emit('VoteSI', vote);
 
                     });
                     break;
@@ -190,7 +190,7 @@ module.exports = {
                         }
                     }).then((vote) => {
 
-                        notifier.emit('get2014', vote);
+                        notifier.emit('Vote2014', vote);
 
                     });
 
@@ -202,7 +202,7 @@ module.exports = {
                         }
                     }).then((vote) => {
 
-                        notifier.emit('get2015', vote);
+                        notifier.emit('Vote2015', vote);
 
                     });
 
@@ -214,7 +214,7 @@ module.exports = {
                         }
                     }).then((vote) => {
 
-                        notifier.emit('get2016', vote);
+                        notifier.emit('Vote2016', vote);
 
                     });
 
@@ -226,7 +226,7 @@ module.exports = {
                         }
                     }).then((vote) => {
 
-                        notifier.emit('get2017', vote);
+                        notifier.emit('Vote2017', vote);
 
                     });
 

@@ -7,37 +7,125 @@ const JwToken       = require('../plugins/jwToken');
 const Sequelize     = require('sequelize');
 const Axios         = require('axios');
 const Querystring   = require('querystring');
+const EventEmitter  = require('events');
+const notifier      = new EventEmitter().setMaxListeners(0);
 
 module.exports = {
 
+    notifier,
+
     register: (request, reply) => {
 
-        const attributes = request.payload;
-
-        Models.User.create(attributes).then((userCreated) => {
-
-            return reply({
-                statusCode: 200,
-                data: userCreated
-            }).code(200);
-
-        }).catch(Sequelize.ValidationError, (err) => {
-
-            // respond with validation errors
-            return reply({
-                statusCode: 400,
-                error: 'Bad Request',
-                message: err.errors[0].message
-            }).code(400);
-
+        Axios.post('https://info.nurulfikri.ac.id/sisfo/api/user/', Querystring.stringify({
+            token: request.payload.token,
+            nim: request.payload.nim,
+            password: request.payload.password
         })
-            .catch((err) => {
+        ).then((response) => {
 
-                console.log(err);
-                return reply(err);
+            const results = response.data;
+            const uniqueCode = generateUniqueCode();
+
+            const userObject = {
+                'nim': results.data.nim,
+                'name': results.data.nama,
+                'password': request.payload.password + uniqueCode,
+                'programStudi': results.data.prodi,
+                'tahunAngkatan': results.data.tahun_angkatan,
+                'status': results.data.status_mhsw,
+                'avatar': results.data.url_foto
+            };
+
+            Models.User.findOne({
+                where: {
+                    nim: request.payload.nim
+                }
+            }).then((checkUser, error) => {
+
+                if (!checkUser) {
+
+                    Models.User.create(userObject).then((user) => {
+
+                        userObject.userId = user.userId;
+
+                        notifier.emit('UniqueCode', {
+                            name: user.name,
+                            uniqueCode
+                        });
+
+                        reply({
+                            statusCode: 200,
+                            data: user,
+                            uniqueCode
+                        }).code(200);
+
+                    }).catch(Sequelize.ValidationError, (err) => {
+
+                        // respond with validation errors
+                        return reply({
+                            statusCode: 400,
+                            error: 'Bad Request',
+                            message: err.errors[0].message
+                        }).code(400);
+
+                    });
+                }
+                else {
+                    return reply(Boom.forbidden('Sorry, Kamu telah login!'));
+                }
 
             });
+        }).catch((error) => {
 
+            // console.log(error);
+            return reply(Boom.unauthorized('Invalid nim or password'));
+
+        });
+
+    },
+
+    login: (request, reply) => {
+
+        const nim = request.payload.nim;
+        const password = request.payload.password;
+
+        Models.User.findOne({
+            where: {
+                nim
+            }
+        }).then((user, err) => {
+
+            if (!user) {
+                return reply(Boom.notFound('Sorry, Account not found!'));
+            }
+
+            // Load hash from your password DB.
+            Bcrypt.compare(password, user.password, (err, valid) => {
+
+                if (err) {
+                    return reply(err);
+                }
+
+                if (!err && valid) {
+
+                    reply({
+                        statusCode: 200,
+                        data: user,
+                        secretToken: JwToken.issue({
+                            user
+                        })
+                    }).code(200);
+
+                }
+                else {
+                    return reply(Boom.unauthorized('Invalid email or password'));
+                }
+            });
+        }).catch((err) => {
+
+            return reply(err);
+
+        });
     },
 
     loginSisfo: (request, reply) => {
@@ -95,14 +183,6 @@ module.exports = {
                     return reply(Boom.forbidden('Sorry, Kamu telah login!'));
                 }
 
-                // reply({
-                //     statusCode: 200,
-                //     data: checkUser,
-                //     secretToken: JwToken.issue({
-                //         checkUser
-                //     })
-                // }).code(200);
-
             });
         }).catch((error) => {
 
@@ -113,4 +193,16 @@ module.exports = {
 
     }
 
+};
+
+// See: https://stackoverflow.com/questions/1349404/generate-random-string-characters-in-javascript
+const generateUniqueCode = () => {
+    let text = '';
+    const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+
+    for (let i = 0; i < 3; i++) {
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+    }
+
+    return text;
 };
