@@ -19,7 +19,7 @@ exports.register = function (server, options, next) {
         vote.on('VoteAhmad', (data) => {
             socket.emit('VoteAhmad', {
                 result: data,
-                relativeTime: Moment().startOf('hour').fromNow()
+                relativeTime: Moment(data.createdAt).startOf('hour').fromNow()
             });
         });
 
@@ -72,8 +72,15 @@ exports.register = function (server, options, next) {
             });
         });
 
-        user.on('UniqueCode', (data) => {
-            socket.emit('UniqueCode', {
+        user.on('RegisterUniqueCode', (data) => {
+            socket.emit('RegisterUniqueCode', {
+                result: data,
+                relativeTime: Moment().startOf('hour').fromNow()
+            });
+        });
+
+        user.on('RegisterVoterTotal', (data) => {
+            socket.emit('RegisterVoterTotal', {
                 result: data,
                 relativeTime: Moment().startOf('hour').fromNow()
             });

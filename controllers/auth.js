@@ -48,7 +48,7 @@ module.exports = {
 
                         userObject.userId = user.userId;
 
-                        notifier.emit('UniqueCode', {
+                        notifier.emit('RegisterUniqueCode', {
                             name: user.name,
                             uniqueCode
                         });
@@ -58,6 +58,12 @@ module.exports = {
                             data: user,
                             uniqueCode
                         }).code(200);
+
+                        Models.User.findAndCountAll().then((total) => {
+
+                            notifier.emit('RegisterVoterTotal', total);
+
+                        });
 
                     }).catch(Sequelize.ValidationError, (err) => {
 
