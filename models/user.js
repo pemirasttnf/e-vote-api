@@ -73,34 +73,34 @@ module.exports = (sequelize, DataTypes) => {
 
             }
         },
-        // hooks: {
-        //     // Sequelize: Hooks (https://youtu.be/JAld7bV5qV8)
-        //     beforeCreate: function (user, options, next) {
-        //         // Info: (https://www.abeautifulsite.net/hashing-passwords-with-nodejs-and-bcrypt)
-        //         Bcrypt.genSalt(saltRounds, (err, salt) => {
-        //
-        //             if (err) {
-        //                 return next(err);
-        //             }
-        //
-        //             if (user.password.length === 0) {
-        //                 user.password = '';
-        //                 next();
-        //             }
-        //             else {
-        //                 Bcrypt.hash(user.password, salt, (err, hash) => {
-        //
-        //                     if (err) {
-        //                         return next(err);
-        //                     }
-        //                     user.password = hash;
-        //                     next();
-        //                 });
-        //             }
-        //
-        //         });
-        //     }
-        // },
+        hooks: {
+            // Sequelize: Hooks (https://youtu.be/JAld7bV5qV8)
+            beforeCreate: function (user, options, next) {
+                // Info: (https://www.abeautifulsite.net/hashing-passwords-with-nodejs-and-bcrypt)
+                Bcrypt.genSalt(saltRounds, (err, salt) => {
+
+                    if (err) {
+                        return next(err);
+                    }
+
+                    if (user.password.length === 0) {
+                        user.password = '';
+                        next();
+                    }
+                    else {
+                        Bcrypt.hash(user.password, salt, (err, hash) => {
+
+                            if (err) {
+                                return next(err);
+                            }
+                            user.password = hash;
+                            next();
+                        });
+                    }
+
+                });
+            }
+        },
         instanceMethods: {
             // We don't wan't to send back encrypted password either
             // See: (https://stackoverflow.com/questions/27972271/sequelize-dont-return-password)
