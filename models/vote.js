@@ -39,7 +39,7 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.INTEGER,
             references: {
                 model: 'Candidate',
-                key: 'candidateId'
+                key: 'candidateUuid'
             },
             onUpdate: 'cascade',
             onDelete: 'cascade'
@@ -68,7 +68,7 @@ module.exports = (sequelize, DataTypes) => {
 
                 // Vote.belongsTo(models.Candidate, {
                 //     as: 'candidate',
-                //     foreignKey: 'candidateId'
+                //     foreignKey: 'candidateUuid'
                 // });
 
             }

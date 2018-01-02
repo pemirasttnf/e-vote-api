@@ -124,7 +124,7 @@ module.exports = {
 
                 }
                 else {
-                    return reply(Boom.unauthorized('Invalid email or password'));
+                    return reply(Boom.unauthorized('Invalid nim or password'));
                 }
             });
         }).catch((err) => {

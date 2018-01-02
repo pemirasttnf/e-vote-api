@@ -63,7 +63,7 @@ module.exports = {
 
         Models.Vote.findAndCountAll({
             where: {
-                vote: 1
+                vote: '09fc24d9-6165-4071-8ec3-83f66256a6b4'
             }
         }).then((vote) => {
 
@@ -88,7 +88,7 @@ module.exports = {
 
         Models.Vote.findAndCountAll({
             where: {
-                vote: 2
+                vote: 'fb468841-8143-4313-a90f-47e56c800c82'
             }
         }).then((vote) => {
 
@@ -142,10 +142,10 @@ module.exports = {
                 }).code(200);
 
                 switch (voteCandidate) {
-                    case '1':
+                    case '09fc24d9-6165-4071-8ec3-83f66256a6b4':
                         Models.Vote.findAndCountAll({
                             where: {
-                                vote: 1
+                                vote: '09fc24d9-6165-4071-8ec3-83f66256a6b4'
                             }
                         }).then((vote) => {
 
@@ -153,10 +153,10 @@ module.exports = {
 
                         });
                         break;
-                    case '2':
+                    case 'fb468841-8143-4313-a90f-47e56c800c82':
                         Models.Vote.findAndCountAll({
                             where: {
-                                vote: 2
+                                vote: 'fb468841-8143-4313-a90f-47e56c800c82'
                             }
                         }).then((vote) => {
 

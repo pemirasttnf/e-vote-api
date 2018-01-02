@@ -5,16 +5,16 @@ const Sequelize = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
 
     const Candidate = sequelize.define('Candidate', {
-        candidateId: {
-            allowNull: false,
-            autoIncrement: true,
-            primaryKey: true,
-            type: DataTypes.INTEGER
-        },
+        // candidateId: {
+        //     allowNull: false,
+        //     autoIncrement: true,
+        //     type: DataTypes.INTEGER
+        // },
         candidateUuid: {
             allowNull: true,
             type: DataTypes.UUID,
             unique: true,
+            primaryKey: true,
             defaultValue: Sequelize.UUIDV1
         },
         candidateNumber: {

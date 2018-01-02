@@ -34,10 +34,10 @@ module.exports = {
                 type: Sequelize.STRING
             },
             vote: {
-                type: Sequelize.INTEGER,
+                type: Sequelize.UUID,
                 references: {
                     model: 'Candidate',
-                    key: 'candidateId'
+                    key: 'candidateUuid'
                 },
                 onUpdate: 'cascade',
                 onDelete: 'cascade'

@@ -8,6 +8,9 @@ exports.register = function (server, options, next) {
 
     const io = require('socket.io')(server.select('websocket').listener);
 
+    // turn off debug
+    // io.set('log level', 1);
+
     io.on('connection', (socket) => {
 
         console.log(`Websocket running at: ${server.select('websocket').info.uri}`);
@@ -15,6 +18,11 @@ exports.register = function (server, options, next) {
         console.log(`Socket ${socket.id} connected !`);
 
         socket.emit('message',{ message: 'Hello From Server :)' });
+
+        // setInterval(() => {
+        //     socket.emit('stream', { 'title': 'A new title via Socket.IO!' });
+        // }, 1000);
+
 
         vote.on('VoteAhmad', (data) => {
             socket.emit('VoteAhmad', {
