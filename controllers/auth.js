@@ -29,6 +29,7 @@ module.exports = {
             const userObject = {
                 'nim': results.data.nim,
                 'name': results.data.nama,
+                'email': request.payload.email,
                 'password': request.payload.password + uniqueCode,
                 'programStudi': results.data.prodi,
                 'tahunAngkatan': results.data.tahun_angkatan,
@@ -105,28 +106,41 @@ module.exports = {
                 return reply(Boom.notFound('Sorry, Account not found!'));
             }
 
-            // Load hash from your password DB.
-            Bcrypt.compare(password, user.password, (err, valid) => {
+            Models.Vote.findOne({
+                where: {
+                    nim: user.nim
+                }
+            }).then((vote, err) => {
 
-                if (err) {
-                    return reply(err);
+                if (vote) {
+                    return reply(Boom.forbidden('Terima kasih, anda sebelumnya telah memberikan suara!'));
                 }
 
-                if (!err && valid) {
+                // Load hash from your password DB.
+                Bcrypt.compare(password, user.password, (err, valid) => {
 
-                    reply({
-                        statusCode: 200,
-                        data: user,
-                        secretToken: JwToken.issue({
-                            user
-                        })
-                    }).code(200);
+                    if (err) {
+                        return reply(err);
+                    }
 
-                }
-                else {
-                    return reply(Boom.unauthorized('Invalid nim or password'));
-                }
+                    if (!err && valid) {
+
+                        reply({
+                            statusCode: 200,
+                            data: user,
+                            secretToken: JwToken.issue({
+                                user
+                            })
+                        }).code(200);
+
+                    }
+                    else {
+                        return reply(Boom.unauthorized('Invalid nim or password'));
+                    }
+                });
+
             });
+
         }).catch((err) => {
 
             return reply(err);
