@@ -78,14 +78,14 @@ module.exports = {
                     });
                 }
                 else {
-                    return reply(Boom.forbidden('Sorry, Kamu telah login!'));
+                    return reply(Boom.forbidden('Afwan, anda sudah voting sebelumnya.'));
                 }
 
             });
         }).catch((error) => {
 
             // console.log(error);
-            return reply(Boom.unauthorized('Invalid nim or password'));
+            return reply(Boom.unauthorized('Astaghfirullah! NIM atau Password salah.'));
 
         });
 
@@ -221,7 +221,7 @@ const generateUniqueCode = () => {
     const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 
     for (let i = 0; i < 3; i++) {
-        text += possible.charAt(Math.floor(Math.random() * possible.length));
+        text += possible.charAt(Math.floor(Math.random() * possible.length)).toUpperCase();
     }
 
     return text;
