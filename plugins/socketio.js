@@ -52,6 +52,20 @@ exports.register = function (server, options, next) {
             });
         });
 
+        vote.on('Vote2012', (data) => {
+            socket.emit('Vote2012', {
+                result: data,
+                relativeTime: Moment().startOf('hour').fromNow()
+            });
+        });
+
+        vote.on('Vote2013', (data) => {
+            socket.emit('Vote2013', {
+                result: data,
+                relativeTime: Moment().startOf('hour').fromNow()
+            });
+        });
+
         vote.on('Vote2014', (data) => {
             socket.emit('Vote2014', {
                 result: data,

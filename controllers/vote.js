@@ -193,6 +193,30 @@ module.exports = {
                 }
 
                 switch (tahunAngkatan) {
+                    case '2012':
+                        Models.Vote.findAndCountAll({
+                            where: {
+                                tahunAngkatan: 2012
+                            }
+                        }).then((vote) => {
+
+                            notifier.emit('Vote2012', vote);
+
+                        });
+
+                        break;
+                    case '2013':
+                        Models.Vote.findAndCountAll({
+                            where: {
+                                tahunAngkatan: 2013
+                            }
+                        }).then((vote) => {
+
+                            notifier.emit('Vote2013', vote);
+
+                        });
+
+                        break;
                     case '2014':
                         Models.Vote.findAndCountAll({
                             where: {
