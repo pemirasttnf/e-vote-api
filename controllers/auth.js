@@ -218,7 +218,7 @@ module.exports = {
 // See: https://stackoverflow.com/questions/1349404/generate-random-string-characters-in-javascript
 const generateUniqueCode = () => {
     let text = '';
-    const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const possible = '0123456789';
 
     for (let i = 0; i < 3; i++) {
         text += possible.charAt(Math.floor(Math.random() * possible.length)).toUpperCase();
