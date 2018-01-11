@@ -19,12 +19,12 @@
     "boilerplate",
     "sequelize"
   ],
-  "author": "Node JS Indonesia <https://github.com/nodejs-indonesia>",
+  "author": "Pemira STT NF <https://github.com/pemirasttnf>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/nodejs-indonesia/hapi-starter/issues"
+    "url": "https://github.com/pemirasttnf/e-vote-api/issues"
   },
-  "homepage": "https://github.com/nodejs-indonesia/hapi-starter#readme",
+  "homepage": "https://github.com/pemirasttnf/e-vote-api#readme",
   "dependencies": {
     "axios": "^0.17.1",
     "bcrypt": "^1.0.3",
