@@ -30,6 +30,206 @@ module.exports = {
         });
     },
 
+    listVoteTI: (request, reply) => {
+
+        Models.Vote.findAndCountAll({
+            where: {
+                programStudi: 'Teknik Informatika'
+            }
+        }).then((vote) => {
+
+            if (!vote) {
+                return reply(Boom.notFound('Vote does not exist.'));
+            }
+
+            return reply({
+                statusCode: 200,
+                total: vote.count,
+                data: vote.rows
+            }).code(200);
+
+        }).catch((err) => {
+
+            return reply(err);
+
+        });
+    },
+
+    listVoteSI: (request, reply) => {
+
+        Models.Vote.findAndCountAll({
+            where: {
+                programStudi: 'Sistem Informasi'
+            }
+        }).then((vote) => {
+
+            if (!vote) {
+                return reply(Boom.notFound('Vote does not exist.'));
+            }
+
+            return reply({
+                statusCode: 200,
+                total: vote.count,
+                data: vote.rows
+            }).code(200);
+
+        }).catch((err) => {
+
+            return reply(err);
+
+        });
+    },
+
+    listVote2012: (request, reply) => {
+
+        Models.Vote.findAndCountAll({
+            where: {
+                tahunAngkatan: 2012
+            }
+        }).then((vote) => {
+
+            if (!vote) {
+                return reply(Boom.notFound('Vote does not exist.'));
+            }
+
+            return reply({
+                statusCode: 200,
+                total: vote.count,
+                data: vote.rows
+            }).code(200);
+
+        }).catch((err) => {
+
+            return reply(err);
+
+        });
+    },
+
+    listVote2013: (request, reply) => {
+
+        Models.Vote.findAndCountAll({
+            where: {
+                tahunAngkatan: 2013
+            }
+        }).then((vote) => {
+
+            if (!vote) {
+                return reply(Boom.notFound('Vote does not exist.'));
+            }
+
+            return reply({
+                statusCode: 200,
+                total: vote.count,
+                data: vote.rows
+            }).code(200);
+
+        }).catch((err) => {
+
+            return reply(err);
+
+        });
+    },
+
+    listVote2014: (request, reply) => {
+
+        Models.Vote.findAndCountAll({
+            where: {
+                tahunAngkatan: 2014
+            }
+        }).then((vote) => {
+
+            if (!vote) {
+                return reply(Boom.notFound('Vote does not exist.'));
+            }
+
+            return reply({
+                statusCode: 200,
+                total: vote.count,
+                data: vote.rows
+            }).code(200);
+
+        }).catch((err) => {
+
+            return reply(err);
+
+        });
+    },
+
+    listVote2015: (request, reply) => {
+
+        Models.Vote.findAndCountAll({
+            where: {
+                tahunAngkatan: 2015
+            }
+        }).then((vote) => {
+
+            if (!vote) {
+                return reply(Boom.notFound('Vote does not exist.'));
+            }
+
+            return reply({
+                statusCode: 200,
+                total: vote.count,
+                data: vote.rows
+            }).code(200);
+
+        }).catch((err) => {
+
+            return reply(err);
+
+        });
+    },
+
+    listVote2016: (request, reply) => {
+
+        Models.Vote.findAndCountAll({
+            where: {
+                tahunAngkatan: 2016
+            }
+        }).then((vote) => {
+
+            if (!vote) {
+                return reply(Boom.notFound('Vote does not exist.'));
+            }
+
+            return reply({
+                statusCode: 200,
+                total: vote.count,
+                data: vote.rows
+            }).code(200);
+
+        }).catch((err) => {
+
+            return reply(err);
+
+        });
+    },
+
+    listVote2017: (request, reply) => {
+
+        Models.Vote.findAndCountAll({
+            where: {
+                tahunAngkatan: 2017
+            }
+        }).then((vote) => {
+
+            if (!vote) {
+                return reply(Boom.notFound('Vote does not exist.'));
+            }
+
+            return reply({
+                statusCode: 200,
+                total: vote.count,
+                data: vote.rows
+            }).code(200);
+
+        }).catch((err) => {
+
+            return reply(err);
+
+        });
+    },
+
     listVoteWithUser: (request, reply) => {
 
         Models.Vote.findAndCountAll({
