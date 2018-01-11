@@ -71,6 +71,7 @@ npm run codecov
 - [Muh Isfhani Ghiath](https://github.com/isfaaghyth) as Mobile Developer
 - [Dhimas Akbar Noor Baihaque](https://github.com/dhimasanb) as Backend Developer
 - [Alfian Rahmatullah](https://github.com/alfianrht) as Frontend Developer
+- [Edo Riansyah](https://github.com/edoriansyah) - as Web Developer STT NF
 
 ### Committee
 - All the committee
